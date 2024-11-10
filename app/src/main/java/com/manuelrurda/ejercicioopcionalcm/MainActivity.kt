@@ -11,37 +11,36 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.manuelrurda.ejercicioopcionalcm.screens.MainScreen
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.EjercicioOpcionalCMTheme
+import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
+    private lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             EjercicioOpcionalCMTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = Main
+                ){
+                    composable<Main> {
+                        MainScreen()
+                    }
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    EjercicioOpcionalCMTheme {
-        Greeting("Android")
-    }
-}
+@Serializable
+object Main

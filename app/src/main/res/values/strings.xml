@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">EjercicioOpcionalCM</string>
+
+    <string name="button_gen_vcard">Generate VCard</string>
+    <string name="button_generate">Generate</string>
+    <string name="button_scan_qr">Scan QR</string>
+
 </resources>
