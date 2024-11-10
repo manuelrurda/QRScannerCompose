@@ -60,7 +60,7 @@ fun MainScreen(){
                 text = stringResource(id = R.string.button_gen_vcard),
                 color = Color.Black,
                 fontSize = 20.sp)
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(15.dp))
             Icon(
                 imageVector = Icons.Default.AccountBox,
                 contentDescription = null,
@@ -80,7 +80,7 @@ fun MainScreen(){
                 text = stringResource(id = R.string.button_scan_qr),
                 color = Color.Black,
                 fontSize = 20.sp)
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(15.dp))
             Icon(
                 painter = painterResource(id = R.drawable.icon_qr_code),
                 contentDescription = null,
