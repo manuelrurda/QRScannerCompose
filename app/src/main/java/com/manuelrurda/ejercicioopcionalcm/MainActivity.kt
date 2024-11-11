@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.manuelrurda.ejercicioopcionalcm.screens.MainScreen
+import com.manuelrurda.ejercicioopcionalcm.screens.VCardScreen
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.EjercicioOpcionalCMTheme
 import kotlinx.serialization.Serializable
 
@@ -26,7 +27,13 @@ class MainActivity : ComponentActivity() {
                     startDestination = Main
                 ){
                     composable<Main> {
-                        MainScreen()
+                        MainScreen(
+                            navController
+                        )
+                    }
+
+                    composable<VCard> {
+                        VCardScreen()
                     }
                 }
             }
@@ -36,3 +43,6 @@ class MainActivity : ComponentActivity() {
 
 @Serializable
 object Main
+
+@Serializable
+object VCard

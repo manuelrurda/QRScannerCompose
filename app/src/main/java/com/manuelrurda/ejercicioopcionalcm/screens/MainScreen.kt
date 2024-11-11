@@ -27,12 +27,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.manuelrurda.ejercicioopcionalcm.R
+import com.manuelrurda.ejercicioopcionalcm.VCard
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.Blue40
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.Yellow40
 
 @Composable
-fun MainScreen(){
+fun MainScreen(navController: NavHostController) {
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -52,7 +55,9 @@ fun MainScreen(){
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.5f),
-            onClick = { /*TODO*/ },
+            onClick = {
+                      navController.navigate(VCard)
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Yellow40
             )) {
@@ -93,5 +98,5 @@ fun MainScreen(){
 @Preview(showBackground = true)
 @Composable
 private fun MainPreview() {
-    MainScreen()
+    MainScreen(rememberNavController())
 }

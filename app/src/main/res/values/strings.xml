@@ -5,4 +5,12 @@
     <string name="button_generate">Generate</string>
     <string name="button_scan_qr">Scan QR</string>
 
+    <string name="label_name">Name</string>
+    <string name="label_phone">Phone Number</string>
+    <string name="label_email">Email</string>
+
+    <string name="placeholder_name">John Doe</string>
+    <string name="placeholder_phone">55 1234 5678</string>
+    <string name="placeholder_email">example@email.com</string>
+
 </resources>
