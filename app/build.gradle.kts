@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.coil.compose)
     implementation(libs.zxing.android.embedded)
+    implementation("com.lightspark:compose-qr-code:1.0.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

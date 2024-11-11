@@ -1,6 +1,8 @@
 package com.manuelrurda.ejercicioopcionalcm.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,33 +20,55 @@ import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.zIndex
+import com.lightspark.composeqr.QrCodeView
 import com.manuelrurda.ejercicioopcionalcm.R
 import com.manuelrurda.ejercicioopcionalcm.components.LabeledTextField
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.Blue40
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.HintBlack
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.Yellow40
+import com.manuelrurda.ejercicioopcionalcm.utils.getVCardString
 import com.manuelrurda.ejercicioopcionalcm.utils.isValidEmail
 import com.manuelrurda.ejercicioopcionalcm.utils.isValidPhoneNumber
 
 @Composable
 fun VCardScreen (){
 
+    val popUpExpanded = remember { mutableStateOf(false) }
     val nameState = rememberSaveable { mutableStateOf("") }
     val phoneState = rememberSaveable { mutableStateOf("") }
     val emailState = rememberSaveable { mutableStateOf("") }
+
+    QRPopup(
+        expanded = popUpExpanded,
+        data = getVCardString(
+            name = nameState.value,
+            phoneNumber = phoneState.value,
+            email = emailState.value
+        )
+    )
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -89,8 +113,7 @@ fun VCardScreen (){
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(70.dp),
-                onClick = {
-                },
+                onClick = {popUpExpanded.value = true},
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Yellow40,
                     disabledContainerColor = HintBlack
@@ -109,6 +132,35 @@ fun VCardScreen (){
                     contentDescription = null,
                     tint = Color.Black,
                     modifier = Modifier.size(30.dp))
+            }
+        }
+    }
+}
+
+@Composable
+fun QRPopup(expanded: MutableState<Boolean>, data: String){
+    if (expanded.value) {
+        println(data)
+        Box(
+            modifier = Modifier
+                .shadow(elevation = 4.dp)
+                .fillMaxSize()
+                .padding(horizontal = 10.dp, vertical = 50.dp)
+                .background(MaterialTheme.colorScheme.surface)
+                .zIndex(10f)
+                .clickable {
+                    expanded.value = false
+                },
+            contentAlignment = Alignment.Center,
+        ) {
+            Popup(
+                onDismissRequest = {expanded.value = false},
+                alignment = Alignment.Center
+            ){
+                QrCodeView(
+                    data = data,
+                    modifier = Modifier.size(300.dp)
+                )
             }
         }
     }

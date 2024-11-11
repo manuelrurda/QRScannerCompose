@@ -9,3 +9,7 @@ fun isValidEmail(email: String): Boolean {
 fun isValidPhoneNumber(phoneNumber: String): Boolean{
     return phoneNumber.length == 10 && phoneNumber.all { c -> c.isDigit()}
 }
+
+fun getVCardString(name: String, phoneNumber: String, email: String): String{
+    return "BEGIN:VCARD\nVERSION:3.0\nFN:$name\nTEL:$phoneNumber\nEMAIL:${email}\nEND:VCARD"
+}
