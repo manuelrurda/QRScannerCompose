@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -32,6 +33,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -81,7 +83,7 @@ fun VCardScreen (){
                 modifier = Modifier.size(300.dp))
         }
         Column(
-            modifier = Modifier.fillMaxHeight(),
+            modifier = Modifier.fillMaxHeight().navigationBarsPadding(),
             verticalArrangement = Arrangement.SpaceEvenly) {
             LabeledTextField(
                 labelText = stringResource(id = R.string.label_name),
@@ -95,6 +97,7 @@ fun VCardScreen (){
                 isValid = { phoneNumber -> isValidPhoneNumber(phoneNumber) },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.NumberPassword,
+                    imeAction = ImeAction.Next
                 ))
 
             LabeledTextField(
@@ -102,7 +105,8 @@ fun VCardScreen (){
                 placeholder = stringResource(id = R.string.placeholder_email),
                 stateHolder = emailState,
                 isValid = { email -> isValidEmail(email) },
-                isOptional = true)
+                isOptional = true,
+                keyboardOptions = KeyboardOptions.Default)
 
             Button(
                 modifier = Modifier
