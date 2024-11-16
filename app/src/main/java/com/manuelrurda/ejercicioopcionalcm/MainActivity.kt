@@ -1,9 +1,9 @@
 package com.manuelrurda.ejercicioopcionalcm
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,7 +13,7 @@ import com.manuelrurda.ejercicioopcionalcm.screens.VCardScreen
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.EjercicioOpcionalCMTheme
 import kotlinx.serialization.Serializable
 
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
     private lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
 

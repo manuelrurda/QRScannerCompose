@@ -1,5 +1,7 @@
 package com.manuelrurda.ejercicioopcionalcm.screens
 
+import android.webkit.URLUtil
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +21,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,13 +34,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
 import com.manuelrurda.ejercicioopcionalcm.R
 import com.manuelrurda.ejercicioopcionalcm.VCard
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.Blue40
 import com.manuelrurda.ejercicioopcionalcm.ui.theme.Yellow40
+import com.manuelrurda.ejercicioopcionalcm.utils.isValidVCardString
 
 @Composable
 fun MainScreen(navController: NavHostController) {
+
+    val scanOptions = getScanOptions()
+    val qrResult = remember { mutableStateOf("") }
+    val qrLauncher = rememberLauncherForActivityResult(
+        contract = ScanContract(), onResult = {result ->
+            qrResult.value = result.contents
+            if (qrResult.value.isNotEmpty()){
+                handleResult(qrResult.value)
+            }
+        })
+
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -79,7 +97,9 @@ fun MainScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.5f),
-            onClick = { /*TODO*/ },
+            onClick = {
+                qrLauncher.launch(scanOptions)
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Yellow40
             )) {
@@ -95,6 +115,22 @@ fun MainScreen(navController: NavHostController) {
                 modifier = Modifier.size(25.dp))
         }
     }
+}
+
+fun handleResult(result: String) {
+    if(URLUtil.isValidUrl(result)){
+
+    }else if (isValidVCardString(result)){
+
+    }
+}
+
+fun getScanOptions(): ScanOptions{
+    val options = ScanOptions()
+    options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+    options.setCameraId(0)
+    options.setOrientationLocked(false)
+    return options
 }
 
 @Preview(showBackground = true)
