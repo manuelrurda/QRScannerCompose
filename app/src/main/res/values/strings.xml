@@ -13,4 +13,8 @@
     <string name="placeholder_phone">55 1234 5678</string>
     <string name="placeholder_email">example@email.com</string>
 
+    <string name="error_invalid_qr">Invalid QR code.</string>
+    <string name="error_camera_permission_req">Camera permission is required to continue. Please enable it in settings.</string>
+    <string name="error_contacts_permission_req">Contact writing permission is required to continue. Please enable it in settings.</string>
+
 </resources>

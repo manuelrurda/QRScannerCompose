@@ -13,3 +13,8 @@ fun isValidPhoneNumber(phoneNumber: String): Boolean{
 fun getVCardString(name: String, phoneNumber: String, email: String): String{
     return "BEGIN:VCARD\nVERSION:3.0\nFN:$name\nTEL:$phoneNumber\nEMAIL:${email}\nEND:VCARD"
 }
+
+fun isValidVCardString(value: String): Boolean{
+    val pattern = Regex("(?s)^BEGIN:VCARD\\RVERSION:3\\.0\\R.*END:VCARD$")
+    return pattern.containsMatchIn(value)
+}
